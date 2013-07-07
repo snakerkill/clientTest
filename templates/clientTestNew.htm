@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>客户端测试工具v1.0</title>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style>
+{{include file="clientTest.css"}}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="title">
+		<h2 style="display:inline;">客户端测试工具v1.0</h2>
+		<div id="author" >make by snaker&lt;wanghao3@ganji.com&gt;</div>
+	</div>
+	<div>
+		<div id="presentation" >
+			<div id="userInfo">
+				<div id="register">
+				<label>用户名</label><input type="text" id="LoginName" size="10" value="{{$user.LoginName}}"/>
+				<label for="user_environment">环境</label><select name="user_environment" id="user_environment">
+					{{foreach from=$options.environment key=key item=value}}
+					<option value="{{$value}}" {{if $user.environment !="" && $user.environment == $value}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select><br/>
+				<label>密&nbsp;&nbsp;码</label><input type="password" id="password" size="10"/>
+				<a class="button" onclick="getUserInfo();">登录</a>
+				</div>
+				<span>当前环境:</span><div id="user_environmentshow" class="user">{{$user.environment}}</div><br/>
+				<span>当前用户:</span><div id="username" class="user">{{$user.LoginName}}</div><br/>
+				<span>用户ID:</span><div id="user_id" class="user">{{$user.LoginId}}</div><br/>
+				<hr/>
+			</div>
+			<div>
+				<div style="color:red;">请首先选择接口</div>
+				<select  id="interface" name="client_interface" style="width:200px;" onblur="getInterfaceInfo();">
+					{{foreach from=$options.client_interface key=key item=value}}
+						<option value="{{$key}}" {{if $smarty.get.interface == $key}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select><nobr/>
+				<hr/>
+			</div>
+			<div id="remind">
+				<h4>接口信息</h4>
+				<div id="interface_info" class="user"></div>
+				<hr/>
+				<hr/>
+			</div>
+		</div>
+		<div id="simulator">
+			<h2>{{$show}}</h2>
+			<hr/>
+
+				<label for="environment"><span>访问环境:</span></label><select id="environment" name="environment">
+				{{foreach from=$options.environment key=key item=value}}
+					<option value="{{$value}}">{{$value}}</option>
+				{{/foreach}}
+				</select>
+				<br/>
+				<h4>header信息</h4><br/>
+				<div id="header_content"></div>
+				<h4>需要添加或覆盖的jsonArgs参数</h4><br/>
+				<div id="jsonArgs_content">
+				</div>
+				<h4>需要添加或覆盖的post_fields参数</h4><br/>
+				<div id="post_fields_content">
+				</div>
+			<button class="request" onclick="request();">fire in hole模拟请求</button><div class='request_remind'>&lt;==click me to simulate</div>
+			<hr/>
+
+				<div><h3>返回结果</h3>
+				<a id="asjson" class="unselect" onclick="showAsJson();">实际返回的json串</a>&nbsp;&nbsp;
+				<a id="asjsonEasy" class="select" onclick="showAsJsonEasy();">易读模式</a><br/>
+					<textarea id="result" rows="18" cols="80" ></textarea>
+				</div>
+		</div>
+	</div>
+</div>
+<script language="javascript">
+{{include file="clientTest.js"}}
+</script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
