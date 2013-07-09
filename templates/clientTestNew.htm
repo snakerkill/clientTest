@@ -3,21 +3,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>客户端测试工具v1.0</title>
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
 <style>
 {{include file="clientTest.css"}}
 </style>
 </head>
 <body>
-<div id="container">
-	<div id="title">
-		<h2 style="display:inline;">客户端测试工具v1.0</h2>
-		<div id="author" >make by snaker&lt;wanghao3@ganji.com&gt;</div>
+<div class="container">
+	<div class="row-fluid" style="background-color:gray;">
+		<div class="span12"><p class="text-center lead">客户端测试工具v2.0</p></div>
+		<div class="span4 offset6"><p class="text-right">make by snaker&lt;wanghao3@ganji.com&gt;</p></div>
 	</div>
-	<div>
-		<div id="presentation" >
-			<div id="userInfo">
+</div>
+<div class="container">
+	<div class="row-fluid">
+		<div class="span4" style="background-color:#CD6839" >
 				<div id="register">
+				<div class="input-prepend" style="display:inline">
+				  <span class="add-on span2">用户名</span>
+				    <input class="input-medium" id="prependedInput" type="text" placeholder="Username">
+				</div>
+				<select name="user_environment" id="user_environment" style="display:inline" class="span3">
+					{{foreach from=$options.environment key=key item=value}}
+					<option value="{{$value}}" {{if $user.environment !="" && $user.environment == $value}}selected{{/if}}>{{$value}}</option>
+					{{/foreach}}
+				</select>
+				<div class="input-prepend" style="display:inline">
+				  <span class="add-on span2">密码</span>
+				    <input class="input-medium" id="prependedInput" type="text" placeholder="Password">
+				</div>
+				<a class="btn btn-primary" onclick="getUserInfo();">登录</a>
 				<label>用户名</label><input type="text" id="LoginName" size="10" value="{{$user.LoginName}}"/>
 				<label for="user_environment">环境</label><select name="user_environment" id="user_environment">
 					{{foreach from=$options.environment key=key item=value}}
@@ -47,8 +64,7 @@
 				<hr/>
 				<hr/>
 			</div>
-		</div>
-		<div id="simulator">
+		<div class="span8" style="background-color:#C1FFC1">
 			<h2>{{$show}}</h2>
 			<hr/>
 
@@ -76,12 +92,14 @@
 				</div>
 		</div>
 	</div>
+	</div>
+</div>
 </div>
 <script language="javascript">
 {{include file="clientTest.js"}}
 </script>
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
 </body>
 </html>
 
