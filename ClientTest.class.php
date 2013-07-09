@@ -131,14 +131,14 @@ Class ClientTest{
 		$this->setInterface($header[9]);
 		
 		//查看是否使用强帐号
-		$this->setToken(&$header);
+		$this->setToken($header);
 
 		if(!empty($this->post['jsonArgs']))
 		{
 			$jsonArgs = urldecode($this->post['jsonArgs']);
 			$jsonArgs = str_replace('\\','',$jsonArgs);
 			$jsonArgs = json_decode($jsonArgs,1);
-			$this->setUserInfo(&$jsonArgs);
+			$this->setUserInfo($jsonArgs);
 		}
 
 		if(!empty($this->post['post']))
@@ -146,7 +146,7 @@ Class ClientTest{
 			$post = urldecode($this->post['post']);
 			$post = str_replace('\\','',$post);
 			$post = json_decode($post,1);
-			$this->setUserInfo(&$post);
+			$this->setUserInfo($post);
 		}
 		$post['jsonArgs'] = json_encode($jsonArgs);
 
@@ -204,7 +204,7 @@ Class ClientTest{
 	/*
 	* 设置发送请求的用户信息
 	*/
-	private function setUserInfo($params){
+	private function setUserInfo(array &$params){
 		$i=0;
 		foreach($params as $key => $value){
 			if( empty($params[$key]) &&
@@ -220,7 +220,7 @@ Class ClientTest{
 			$i++;
 		}
 	}
-	private function setToken(array $header){
+	private function setToken(array &$header){
 		$header[] = 'token:'.$_COOKIE['CT_token'];
 	}
 
